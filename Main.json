@@ -1,0 +1,591 @@
+[
+    {
+        "id": "437e85b9d4e0ea9a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3c6a26408d1e33fd",
+        "type": "mqtt-broker",
+        "name": "ttnconnection",
+        "broker": "eu2.cloud.thethings.industries",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "57a80cd3f971722f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "df1e76e6d3705dc6",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "bca7939e2a1eddad",
+        "type": "ui_group",
+        "name": "Lorawan Salinity Monitoring ",
+        "tab": "57a80cd3f971722f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d7ca859cc0f99080",
+        "type": "mqtt in",
+        "z": "437e85b9d4e0ea9a",
+        "name": "",
+        "topic": "v3/salineiot@salineiot/devices/lucas-arduinov2/up",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "3c6a26408d1e33fd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 540,
+        "wires": [
+            [
+                "b95dad4d9981c662",
+                "3af714303922a5de"
+            ]
+        ]
+    },
+    {
+        "id": "5d58a50660ca3ace",
+        "type": "debug",
+        "z": "437e85b9d4e0ea9a",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "b95dad4d9981c662",
+        "type": "function",
+        "z": "437e85b9d4e0ea9a",
+        "name": "Msg Extraction",
+        "func": "msg.payload = msg.payload['uplink_message']['decoded_payload']['payload'];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 540,
+        "wires": [
+            [
+                "5d58a50660ca3ace",
+                "00619070bca6d4d3"
+            ]
+        ]
+    },
+    {
+        "id": "00619070bca6d4d3",
+        "type": "ui_text",
+        "z": "437e85b9d4e0ea9a",
+        "group": "bca7939e2a1eddad",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Gate Status: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "94797e3be6b45d0e",
+        "type": "mqtt out",
+        "z": "437e85b9d4e0ea9a",
+        "name": "",
+        "topic": "v3/salineiot@salineiot/devices/lucas-arduinov2/down/replace",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c6a26408d1e33fd",
+        "x": 620,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b72195195a5b0bc4",
+        "type": "function",
+        "z": "437e85b9d4e0ea9a",
+        "name": "Conversion of Payload",
+        "func": "let buff = Buffer.from(msg.payload, 'hex')\nlet base64data = buff.toString('base64')\n\nmsg.payload = {\n    \"downlinks\": [{\n        \"f_port\": 15,\n        \"frm_payload\": base64data,\n        \"schedule\": 'replace',\n        \"confirmed\": true,\n        \"priority\": \"NORMAL\"\n    }]\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 340,
+        "wires": [
+            [
+                "853361a40520a052"
+            ]
+        ]
+    },
+    {
+        "id": "a101df07293e1d89",
+        "type": "ui_button",
+        "z": "437e85b9d4e0ea9a",
+        "name": "",
+        "group": "bca7939e2a1eddad",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Test Gauage",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 90,
+        "y": 100,
+        "wires": [
+            [
+                "ce59c8489a8d9f73"
+            ]
+        ]
+    },
+    {
+        "id": "f6b3c66090018ba8",
+        "type": "ui_gauge",
+        "z": "437e85b9d4e0ea9a",
+        "name": "",
+        "group": "bca7939e2a1eddad",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Salinity Gauge",
+        "label": "Percentage",
+        "format": "{{msg.payload}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 700,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ce59c8489a8d9f73",
+        "type": "function",
+        "z": "437e85b9d4e0ea9a",
+        "name": "rnd gen",
+        "func": "let randomnum = Math.floor(Math.random() * 10);\nlet msgPayloadString = randomnum.toString();\n// @ts-ignore\nlet base64data = msgPayloadString.toString('base64')\n\n\nmsg.payload = {\n    \"downlinks\": [{\n        \"f_port\": 15,\n        \"frm_payload\": randomnum,\n        \"schedule\": 'replace',\n        \"confirmed\": true,\n        \"priority\": \"NORMAL\"\n        \n\n    }]\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 100,
+        "wires": [
+            [
+                "94797e3be6b45d0e",
+                "e3c18762b3b5a22b",
+                "a1c4c7c7532e9898"
+            ]
+        ]
+    },
+    {
+        "id": "cd055a09dd41c3d0",
+        "type": "ui_button",
+        "z": "437e85b9d4e0ea9a",
+        "name": "",
+        "group": "bca7939e2a1eddad",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "CLOSE THE GATE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "436c6f736564",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "b72195195a5b0bc4",
+                "b017b4d02f2bcdbd"
+            ]
+        ]
+    },
+    {
+        "id": "4027b1bd15c125d8",
+        "type": "ui_button",
+        "z": "437e85b9d4e0ea9a",
+        "name": "",
+        "group": "bca7939e2a1eddad",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "OPEN THE GATE",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "6F70656E",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "b017b4d02f2bcdbd",
+                "b72195195a5b0bc4"
+            ]
+        ]
+    },
+    {
+        "id": "853361a40520a052",
+        "type": "mqtt out",
+        "z": "437e85b9d4e0ea9a",
+        "name": "",
+        "topic": "v3/salineiot@salineiot/devices/lucas-arduinov2/down/replace",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3c6a26408d1e33fd",
+        "x": 880,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b017b4d02f2bcdbd",
+        "type": "function",
+        "z": "437e85b9d4e0ea9a",
+        "name": "Msg open",
+        "func": "if (msg.payload === \"6F70656E\") {\n  msg.payload = 'Open';\n} else if (msg.payload === \"436c6f736564\") {\n  msg.payload = 'Closed';\n} else {\n  msg.payload = \"null\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 440,
+        "wires": [
+            [
+                "00619070bca6d4d3",
+                "cdaf766b74ed3ded"
+            ]
+        ]
+    },
+    {
+        "id": "e3c18762b3b5a22b",
+        "type": "function",
+        "z": "437e85b9d4e0ea9a",
+        "name": "Msg Extraction",
+        "func": "msg.payload = msg.payload['downlinks']['0']['frm_payload'];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 180,
+        "wires": [
+            [
+                "f6b3c66090018ba8",
+                "744dd34a05210fd5",
+                "9efdc12ffc7b9cee"
+            ]
+        ]
+    },
+    {
+        "id": "3af714303922a5de",
+        "type": "debug",
+        "z": "437e85b9d4e0ea9a",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "744dd34a05210fd5",
+        "type": "function",
+        "z": "437e85b9d4e0ea9a",
+        "name": "function 1",
+        "func": "if (msg.payload < 5){\n    msg.payload =\"6F70656E\"\n}\nif (msg.payload >= 5){\n    msg.payload =\"436c6f736564\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 160,
+        "y": 340,
+        "wires": [
+            [
+                "b72195195a5b0bc4",
+                "b017b4d02f2bcdbd",
+                "bd854ae792335b85"
+            ]
+        ]
+    },
+    {
+        "id": "bd854ae792335b85",
+        "type": "debug",
+        "z": "437e85b9d4e0ea9a",
+        "name": "debug 6",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "9efdc12ffc7b9cee",
+        "type": "debug",
+        "z": "437e85b9d4e0ea9a",
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "cdaf766b74ed3ded",
+        "type": "debug",
+        "z": "437e85b9d4e0ea9a",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a1c4c7c7532e9898",
+        "type": "debug",
+        "z": "437e85b9d4e0ea9a",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b1da576b0f2e6ad3",
+        "type": "file",
+        "z": "437e85b9d4e0ea9a",
+        "name": "",
+        "filename": "",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 140,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    }
+]
